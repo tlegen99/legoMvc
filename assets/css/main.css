@@ -1,0 +1,31 @@
+header{
+	color: #f0ffff;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	min-height: 4rem;
+    background-color: #2A3440;
+}
+section{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.model_wrapper .model__item{
+	margin-bottom: 20px;
+}
+.model_wrapper .model__item .model-item_title{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+}
+
+
+footer{
+	color: #f0ffff;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	min-height: 4rem;
+	background-color: #2A3440;
+}

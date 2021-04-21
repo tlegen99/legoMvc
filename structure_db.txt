@@ -1,0 +1,23 @@
+//product_model
+id : integer
+brand_id : integer
+user_id : integer
+name : string
+description : text
+image : string
+
+
+//product_brand
+id : integer
+name_brand : string
+description : text
+
+
+//users
+id : integer
+first_name : string
+nick_name : string
+email : string
+access_level : integer
+pass_hash : string
+avatar : string

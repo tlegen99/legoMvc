@@ -15,8 +15,10 @@ class ProductController
 		$product = new Product;
 		$productList = $product->getListView($page);
 
+		
+
 		// Создаем объект Pagination - постраничная навигация
-        $pagination = new Pagination(7, $page, Product::SHOW_BY_DEFAULT, 'page-');
+        $pagination = new Pagination($product->getProductCount() + 1, $page, Product::SHOW_BY_DEFAULT, 'page-');
 
 		require_once ROOT.'/views/product/index.php';
 

@@ -8,6 +8,18 @@ class Product
 
 	const SHOW_BY_DEFAULT = 3;
 	
+	public function getProductCount()
+	{
+		$connect = Db::getConnection();
+
+		$sql = "SELECT COUNT(*) FROM product_model";
+
+		$res = $connect->query($sql);
+		$count = $res->fetchColumn();
+
+		return $count;
+	}
+
 	public function getProductList($limit, $offset)
 	{
 		$connect = Db::getConnection();

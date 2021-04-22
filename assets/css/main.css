@@ -1,3 +1,6 @@
+body{
+  height: 100%;
+}
 header{
 	color: #f0ffff;
 	display: flex;
@@ -22,12 +25,19 @@ section{
 
 
 footer{
-	color: #f0ffff;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-	min-height: 4rem;
-	background-color: #2A3440;
+  color: #f0ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 4rem;
+  background-color: #2A3440;
+
+/*  position: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  min-width: 320px;*/
 }
 
 
@@ -54,8 +64,8 @@ ul.pagination {
 }
 
 .pagination  .active  a, .pagination  .active  span, .pagination  .active  a:hover, .pagination  .active  span:hover, .pagination  .active  a:focus, .pagination  .active  span:focus {
-  background-color: #0f37fe;
-  border-color: #0f37fe;
+  background-color: #007bff;
+  border-color: #007bff;
   color: #FFFFFF;
   cursor: default;
   z-index: 2;
@@ -75,6 +85,7 @@ ul.pagination {
 }
 
 .pagination  li  a:hover{
-	background:#0f37fe;
+	background:#007bff;
 	color:#fff;
 }
+

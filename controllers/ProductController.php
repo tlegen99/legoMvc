@@ -4,8 +4,8 @@
  * class ProductController
  */
 
-require_once ROOT.'/models/Product.php';
-require_once ROOT.'/components/Pagination.php';
+use models\Product;
+use components\Pagination;
 
 class ProductController
 {

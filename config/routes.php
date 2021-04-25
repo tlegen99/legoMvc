@@ -2,7 +2,7 @@
 
 return [
 
-	'admin' => 'admin/login',
+	'admin' => 'user/login',
 
 	'products/page-([0-9]+)' => 'product/index/$1',
 

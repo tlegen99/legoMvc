@@ -3,6 +3,10 @@
 /**
  * class Product
  */
+
+namespace models;
+use components\Db;
+
 class Product
 {
 

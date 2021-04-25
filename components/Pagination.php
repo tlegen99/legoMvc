@@ -4,6 +4,8 @@
  * Класс для генерации постраничной навигации
  */
 
+namespace components;
+
 class Pagination
 {
 

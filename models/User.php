@@ -15,7 +15,7 @@ class User
 
 	public static function checkName($name)
 	{
-		if ($name >= 3) {
+		if (strlen($name) >= 3) {
 			return true;
 		}	
 
@@ -24,6 +24,10 @@ class User
 	
 	public static function checkPassword($password)
 	{
-			
+		if (strlen($password) >= 6) {
+			return true;
+		}	
+
+		return false;
 	}	
 }

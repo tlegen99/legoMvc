@@ -19,14 +19,18 @@ class UserController
 
 			$errors = false;
 
-			if (User::checkName($name)) {
-				echo '<b>Имя заполнено верно</b>';
+			if (!User::checkName($name)) {
+				$errors[] = 'Имя не должно быть короче 3 символов';
+			}
+
+			if (!User::checkPassword($password)) {
+				$errors[] = 'Пароль не должен быть короче 6 символов';
 			}
 		}
 
-		if (isset($password)) {
-			echo $password . '<br>';
-		}
+		echo '<pre>';
+		print_r($errors);
+		exit;
 		
 		require_once ROOT.'/views/user/login.php';
 

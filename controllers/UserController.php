@@ -13,11 +13,15 @@ class UserController
 		$name = '';
 		$password = '';
 
+		$errors = false;
+
+		// echo '<pre>';
+		// print_r(md5(User::pass()['pass_hash']));
+		// exit;
+
 		if (isset($_POST['submit'])) {
 			$name = $_POST['login'];
 			$password = $_POST['password'];
-
-			$errors = false;
 
 			if (!User::checkName($name)) {
 				$errors[] = 'Имя не должно быть короче 3 символов';
@@ -26,11 +30,13 @@ class UserController
 			if (!User::checkPassword($password)) {
 				$errors[] = 'Пароль не должен быть короче 6 символов';
 			}
-		}
 
-		echo '<pre>';
-		print_r($errors);
-		exit;
+			if (User::checkNameExist($name)) {
+				$errors[] = 'Такой логин уже существует';
+			}else{
+				echo 'Успешно';
+			}
+		}
 		
 		require_once ROOT.'/views/user/login.php';
 

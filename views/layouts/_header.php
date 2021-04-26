@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="/assets/css/main.css" type="text/css">
 </head>
 <body>
-<div class="wrapper">
 	<header class="header">
 		Header
 	</header>
+	<div class="wrapper">

@@ -1,6 +1,17 @@
 <?php include ROOT.'/views/layouts/_header.php'; ?>
 	<section>
 		<div class="container">
+
+			<?php if ($errors or is_array($errors)): ?>
+				<ul class="errors">
+					<?php foreach ($errors as $error): ?>
+						<li>
+							<?= $error; ?>
+						</li>
+					<?php endforeach ?>
+				</ul>
+			<?php endif ?>
+
 			<div class="row">
 				<form action="#" method="POST">
 				  <div class="form-group">

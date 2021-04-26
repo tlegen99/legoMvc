@@ -1,6 +1,14 @@
-body{
+html, body{
   height: 100%;
 }
+body{
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  flex: 1 0 auto;
+}
+
 header{
 	color: #f0ffff;
 	display: flex;
@@ -31,13 +39,7 @@ footer{
   align-items: center;
   min-height: 4rem;
   background-color: #2A3440;
-
-/*  position: inherit;
-  top: 0;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-  min-width: 320px;*/
+  flex-shrink: 0;
 }
 
 
@@ -89,3 +91,10 @@ ul.pagination {
 	color:#fff;
 }
 
+
+ul.errors{
+  padding-left: 0;
+}
+ul.errors li{
+    color: #B22222;
+}

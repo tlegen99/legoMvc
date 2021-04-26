@@ -1,6 +1,7 @@
 <?php
 
 namespace models;
+use components\Db;
 
 /**
  * class User
@@ -29,5 +30,32 @@ class User
 		}	
 
 		return false;
-	}	
+	}
+
+	public static function checkNameExist($name)
+	{
+		$db = Db::getConnection();
+		$sql = "SELECT COUNT(*) FROM users WHERE nick_name = :nick_name";
+		$result = $db->prepare($sql);
+		$result->bindParam(':nick_name', $name, \PDO::PARAM_STR);
+		$result->execute();
+
+		if ($result->fetchColumn()) {
+			return true;
+		}
+		return false;
+
+	}
+
+	// public static function pass()
+	// {
+	// 	$db = Db::getConnection();
+	// 	$sql = "SELECT pass_hash FROM users WHERE nick_name = 'admin'";
+
+	// 	$result = $db->prepare($sql);
+	// 	$result->execute();
+	// 	$row = $result->fetch();
+
+	// 	return $row;
+	// }
 }

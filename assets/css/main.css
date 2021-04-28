@@ -10,12 +10,18 @@ body{
 }
 
 header{
-	color: #f0ffff;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-	min-height: 4rem;
-    background-color: #2A3440;
+  color: #f0ffff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 4rem;
+  background-color: #2A3440;
+}
+header a{
+  color: #f0ffff;
+}
+header a:hover{
+  color: #007bff;
 }
 section{
 	margin-top: 40px;

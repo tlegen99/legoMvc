@@ -12,6 +12,23 @@
 </head>
 <body>
 	<header class="header">
-		Header
+		<nav class="navbar navbar-expand-lg">
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item">
+		        <a class="nav-link" href="/products">Каталог</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/admin">Админка</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/login">Вход</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/logout">Выйти</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
 	</header>
 	<div class="wrapper">

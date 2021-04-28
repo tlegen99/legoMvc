@@ -33,13 +33,27 @@ class UserController
 
 			if (User::checkNameExist($name)) {
 				$errors[] = 'Такой логин уже существует';
+			}
+
+
+			$userId = User::checkUserData($name, $password);
+
+			if ($userId == false) {
+				$errors[] = 'Неверные данные для входа';
 			}else{
-				echo 'Успешно';
+				User::auth($userId);
+				header('Location: /admin');
 			}
 		}
 		
 		require_once ROOT.'/views/user/login.php';
 
 		return true;
+	}
+
+	public function actionLogout()
+	{
+		unset($_SESSION['user']);
+		header('Location: /');
 	}
 }

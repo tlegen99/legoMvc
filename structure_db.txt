@@ -11,6 +11,8 @@ image : string
 id : integer
 name_brand : string
 description : text
+sort_order: integer
+status: integer
 
 
 //users

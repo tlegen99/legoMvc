@@ -12,7 +12,7 @@ class Product
 
 	const SHOW_BY_DEFAULT = 3;
 	
-	public function getProductCount()
+	public static function getProductCount()
 	{
 		$connect = Db::getConnection();
 
@@ -24,7 +24,27 @@ class Product
 		return $count;
 	}
 
-	public function getProductList($limit, $offset)
+	public static function getProductList()
+	{
+		$connect = Db::getConnection();
+
+		$sql = "SELECT * FROM product_model";
+
+		$productList = [];
+
+		foreach ($connect->query($sql) as $key => $row) {
+			$productList[$key]['id'] = $row['id'];
+			$productList[$key]['brand_id'] = $row['brand_id'];
+			$productList[$key]['user_id'] = $row['user_id'];
+			$productList[$key]['name'] = $row['name'];
+			$productList[$key]['description'] = $row['description'];
+			$productList[$key]['image'] = $row['image'];
+		}
+
+		return $productList;
+	}
+
+	public static function getProductOffsetList($limit, $offset)
 	{
 		$connect = Db::getConnection();
 
@@ -44,7 +64,7 @@ class Product
 		return $productList;
 	}
 
-	public function getListView($page)
+	public static function getListView($page)
 	{
 		// $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -52,8 +72,17 @@ class Product
 
 		$offset = $limit * ($page - 1);
 
-		$products = $this->getProductList($limit, $offset);
+		$products = self::getProductOffsetList($limit, $offset);
 
 		return $products;
+	}
+
+	public static function createProduct($options)
+	{
+		$db = Db::getConnection();
+
+		echo '<pre>';
+		print_r($db);
+		exit;
 	}
 }

@@ -2,15 +2,22 @@
 
 return [
 
-	'logout' => 'user/logout',
+	// каталог,товары
+	'products/page-([0-9]+)' => 'product/index/$1',
+	'products' => 'product/index',
 
+	// Пользователь:
+	'logout' => 'user/logout',
 	'login' => 'user/login',
 
-	'admin' => 'admin/index',
+	//Управление товарами:
+    'admin/product/create' => 'adminProduct/create',
+    'admin/product/update/([0-9]+)' => 'adminProduct/update/$1',
+    'admin/product/delete/([0-9]+)' => 'adminProduct/delete/$1',
+	'admin/product' => 'adminProduct/index',
 
-	'products/page-([0-9]+)' => 'product/index/$1',
-	
-	'products' => 'product/index',
+	//Администратор:
+	'admin' => 'admin/index',
 
 	'' => 'site/index',
 ];

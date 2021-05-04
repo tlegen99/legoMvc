@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 28 2021 г., 10:34
+-- Время создания: Май 04 2021 г., 20:53
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -53,6 +53,20 @@ INSERT INTO `news` (`id`, `title`, `date`, `short_content`, `content`, `author_n
 (8, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', '2016-05-11 19:00:00', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', 'TopicAuthor', 'images/2.png', 'NewsPublication'),
 (9, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', '2016-05-11 19:00:00', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', 'TopicAuthor', 'images/2.png', 'NewsPublication'),
 (10, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.', '2016-03-11 19:00:00', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', '				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, ea distinctio unde, tenetur explicabo dolorem ab aut optio, amet nihil fugit praesentium. Quia, numquam ut deserunt nemo, quae dicta dolores!', 'TopicAuthor', 'images/2.png', 'NewsPublication');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `product_brand`
+--
+
+CREATE TABLE `product_brand` (
+  `id` int(11) NOT NULL,
+  `name_brand` varchar(255) NOT NULL,
+  `description` text,
+  `sort_order` int(11) NOT NULL,
+  `status` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -118,6 +132,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `product_brand`
+--
+ALTER TABLE `product_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `product_model`
 --
 ALTER TABLE `product_model`
@@ -140,6 +160,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT для таблицы `product_brand`
+--
+ALTER TABLE `product_brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `product_model`

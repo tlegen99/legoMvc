@@ -6,7 +6,7 @@
 				<h1>Административная панель</h1>
 
 				<ul>
-					<li><a href="/admin/edit">Редактировать данные</a></li>
+					<li><a href="/admin/product">Листинг авто</a></li>
 				</ul>
 			</div>
 		</div>

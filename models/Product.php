@@ -77,12 +77,22 @@ class Product
 		return $products;
 	}
 
-	public static function createProduct($options)
+	public static function createProduct($options, $user_id)
 	{
-		$db = Db::getConnection();
+		$connect = Db::getConnection();
 
-		echo '<pre>';
-		print_r($db);
-		exit;
+		$sql = "INSERT product_model (brand_id, user_id, name, description) VALUES (:brand_id, :user_id, :name, :description)";
+
+		$result = $connect->prepare($sql);
+        $result->bindParam(':brand_id', $options['brand_id'], \PDO::PARAM_INT);
+        $result->bindParam(':user_id', $user_id, \PDO::PARAM_INT);
+        $result->bindParam(':name', $options['name'], \PDO::PARAM_STR);
+        $result->bindParam(':description', $options['description'], \PDO::PARAM_STR);
+        if ($result->execute()) {
+            // Если запрос выполенен успешно, возвращаем id добавленной записи
+            return $connect->lastInsertId();
+        }
+        // Иначе возвращаем 0
+        return 0;
 	}
 }

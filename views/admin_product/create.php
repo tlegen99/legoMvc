@@ -2,9 +2,22 @@
 
 <section>
 	<div class="container">
-		<div class="col-sm-6">
-			<h2 class="mb-4">Добавление авто</h2>
-			<form method="POST">
+
+		<?php if ($errors or is_array($errors)): ?>
+			<ul class="errors">
+				<?php foreach ($errors as $error): ?>
+					<li>
+						<?= $error; ?>
+					</li>
+				<?php endforeach ?>
+			</ul>
+		<?php endif ?>
+
+		<div class="row mb-4">
+			<h2>Добавление авто</h2>
+		</div>
+		<div class="row">
+			<form method="POST" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Бренд</label>
 					<input type="text" class="form-control" name="brand_id">

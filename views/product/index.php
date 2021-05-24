@@ -15,7 +15,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="model-item_img">
-								<img src="/assets/image/product/<?= $product['image']; ?>.jpg" width="400" height="300" alt="">
+								<img src="/assets/image/product/<?= (string)$product['image']; ?>" width="400" height="300" alt="">
 							</div>
 						</div>
 					</div>

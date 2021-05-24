@@ -31,7 +31,10 @@ class AdminProductController extends AdminBase
 			$options['brand_id'] = $_POST['brand_id'];
 			$options['name'] = $_POST['name'];
 			$options['description'] = $_POST['description'];
-			$options['image'] = $_POST['image'] ?: md5($_POST['image']);
+			// $options['image'] = $_POST['image'] ?: md5($_POST['image']);
+
+			$exp_image = explode(".", $_FILES["image"]['name']);
+			$options['image'] = md5($exp_image[0]).'.'.$exp_image[1];
 
 			if (!isset($options['name']) or empty($options['name'])) {
 				$errors[] = 'Заполните поле';
@@ -39,13 +42,12 @@ class AdminProductController extends AdminBase
 
 			if ($errors == false) {
 				$id = Product::createProduct($options, self::checkAdmin());
-
                 // Если запись добавлена
                 if ($id) {
                     // Проверим, загружалось ли через форму изображение
                     if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
                         // Если загружалось, переместим его в нужную папке, дадим новое имя
-                        move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/assets/image/product/{$options['image']}.jpg");
+                        move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/assets/image/product/{$options['image']}");
                     }
                 };
 			}

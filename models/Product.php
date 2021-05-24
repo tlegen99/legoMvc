@@ -81,13 +81,14 @@ class Product
 	{
 		$connect = Db::getConnection();
 
-		$sql = "INSERT product_model (brand_id, user_id, name, description) VALUES (:brand_id, :user_id, :name, :description)";
+		$sql = "INSERT product_model (brand_id, user_id, name, description, image) VALUES (:brand_id, :user_id, :name, :description, :image)";
 
 		$result = $connect->prepare($sql);
         $result->bindParam(':brand_id', $options['brand_id'], \PDO::PARAM_INT);
         $result->bindParam(':user_id', $user_id, \PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], \PDO::PARAM_STR);
         $result->bindParam(':description', $options['description'], \PDO::PARAM_STR);
+        $result->bindParam(':image', $options['image'], \PDO::PARAM_STR);
         if ($result->execute()) {
             // Если запрос выполенен успешно, возвращаем id добавленной записи
             return $connect->lastInsertId();

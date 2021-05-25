@@ -25,7 +25,7 @@
 					<td><?= $product['brand_id']; ?></td>
 					<td><?= $product['name']; ?></td>
 					<td>
-						<image src="/assets/image/<?= $product['image']; ?>" width="100"></image>
+						<image src="/assets/image/product/<?= $product['image']; ?>" width="100"></image>
 					</td>
                     <td>
                     	<a href="/admin/product/update/<?php echo $product['id']; ?>" title="Редактировать">

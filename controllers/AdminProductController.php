@@ -31,10 +31,9 @@ class AdminProductController extends AdminBase
 			$options['brand_id'] = $_POST['brand_id'];
 			$options['name'] = $_POST['name'];
 			$options['description'] = $_POST['description'];
-			// $options['image'] = $_POST['image'] ?: md5($_POST['image']);
 
-			$exp_image = explode(".", $_FILES["image"]['name']);
-			$options['image'] = md5($exp_image[0]).'.'.$exp_image[1];
+			$exp_image = pathinfo($_FILES["image"]['name']);
+			$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
 
 			if (!isset($options['name']) or empty($options['name'])) {
 				$errors[] = 'Заполните поле';
@@ -55,6 +54,21 @@ class AdminProductController extends AdminBase
 		}
 
 		require_once ROOT.'/views/admin_product/create.php';
+		return true;
+	}
+
+	public function actionUpdate($id)
+	{
+		self::checkAdmin();
+
+		$options = [];
+		$errors = false;
+
+		echo '<pre>';
+		print_r($id);
+		exit;
+
+		require_once ROOT.'/views/admin_product/update.php';
 		return true;
 	}
 }

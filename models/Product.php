@@ -96,4 +96,34 @@ class Product
         // Иначе возвращаем 0
         return 0;
 	}
+
+	public static function getProductById($id)
+	{
+		$connect = Db::getConnection();
+		$sql = "SELECT * FROM product_model WHERE id = {$id}";
+
+		$result = $connect->prepare($sql);
+
+		//приводит к норм(дефолтной) выборке из базы в массиве
+		$result->setFetchMode(\PDO::FETCH_ASSOC);
+
+		//запускает команду
+		$result->execute();
+		//возвращаем полученный результат
+		return $result->fetch();
+	}
+
+	public static function updateProductById($id, $options)
+	{
+		$connect = Db::getConnection();
+		$sql = "UPDATE product_model SET brand_id = :brand_id,name = :name,description = :description, image = :image WHERE id = :id";
+
+		$result = $connect->prepare($sql);
+		$result->bindParam(':id', $id, \PDO::PARAM_INT);
+		$result->bindParam(':brand_id', $options['brand_id'], \PDO::PARAM_INT);
+		$result->bindParam(':name', $options['name'], \PDO::PARAM_STR);
+		$result->bindParam(':description', $options['description'], \PDO::PARAM_STR);
+		$result->bindParam(':image', $options['image'], \PDO::PARAM_STR);
+		return $result->execute();
+	}
 }

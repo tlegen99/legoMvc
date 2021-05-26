@@ -2,6 +2,7 @@
 
 use components\AdminBase;
 use models\Product;
+use models\Brand;
 
 /**
  * class AdminProductController
@@ -22,6 +23,7 @@ class AdminProductController extends AdminBase
 	public function actionCreate()
 	{
 		self::checkAdmin();
+		$brandList = Brand::getBrandsListAdmin();
 
 		$options = [];
 		$errors = false;
@@ -33,7 +35,11 @@ class AdminProductController extends AdminBase
 			$options['description'] = $_POST['description'];
 
 			$exp_image = pathinfo($_FILES["image"]['name']);
-			$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
+			if ($exp_image['filename'] && $exp_image['extension']) {
+				$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
+			}else{
+				$options['image'] = NULL;
+			}
 
 			if (!isset($options['name']) or empty($options['name'])) {
 				$errors[] = 'Заполните поле';
@@ -46,7 +52,7 @@ class AdminProductController extends AdminBase
                     // Проверим, загружалось ли через форму изображение
                     if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
                         // Если загружалось, переместим его в нужную папке, дадим новое имя
-                        move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/assets/image/product/{$options['image']}");
+                        move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . "/assets/image/product/{$options['image']}");
                     }
                 };
 			}
@@ -62,13 +68,33 @@ class AdminProductController extends AdminBase
 		self::checkAdmin();
 
 		$options = [];
-		$errors = false;
 
-		echo '<pre>';
-		print_r($id);
-		exit;
+		$brandList = Brand::getBrandsListAdmin();
+
+		$product = Product::getProductById($id);
+
+		if (isset($_POST['submit'])) {
+			$options['brand_id'] = $_POST['brand_id'];
+			$options['name'] = $_POST['name'];
+			$options['description'] = $_POST['description'];
+
+			$exp_image = pathinfo($_FILES["image"]['name']);
+			if ($exp_image['filename'] && $exp_image['extension']) {
+				$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
+			}
+			if(Product::updateProductById($id, $options)) {
+                // Проверим, загружалось ли через форму изображение
+                if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+                    // Если загружалось, переместим его в нужную папке, дадим новое имя
+                    move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . "/assets/image/product/{$options['image']}");
+                }
+
+				header("Location: /admin/product");
+			}
+		}
 
 		require_once ROOT.'/views/admin_product/update.php';
+		
 		return true;
 	}
 }

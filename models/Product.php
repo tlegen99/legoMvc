@@ -90,10 +90,26 @@ class Product
         $result->bindParam(':description', $options['description'], \PDO::PARAM_STR);
         $result->bindParam(':image', $options['image'], \PDO::PARAM_STR);
         if ($result->execute()) {
-            // Если запрос выполенен успешно, возвращаем id добавленной записи
             return $connect->lastInsertId();
         }
-        // Иначе возвращаем 0
+
+        return 0;
+	}
+
+	public static function addProductImages($nameImage, $product_id)
+	{
+		$connect = Db::getConnection();
+
+		$sql = "INSERT product_image (product_id, name) VALUES (:product_id, :name)";
+
+		$result = $connect->prepare($sql);
+        $result->bindParam(':product_id', $product_id, \PDO::PARAM_INT);
+        $result->bindParam(':name', $nameImage, \PDO::PARAM_STR);
+
+        if ($result->execute()) {
+            return $connect->lastInsertId();
+        }
+
         return 0;
 	}
 
@@ -125,5 +141,29 @@ class Product
 		$result->bindParam(':description', $options['description'], \PDO::PARAM_STR);
 		$result->bindParam(':image', $options['image'], \PDO::PARAM_STR);
 		return $result->execute();
+	}
+
+	public static function deleteProductById($id)
+	{
+		$connect = Db::getConnection();
+		$sql = "DELETE FROM product_model WHERE id = :id";
+
+		$result = $connect->prepare($sql);
+		$result->bindParam(':id', $id, \PDO::PARAM_INT);
+		return $result->execute();
+	}
+
+
+    public static function getImageUrl($name_image)
+    {
+    	$noImage = 'no-image.jpg';
+    	$path = '/assets/image/product/';
+    	$filePath = $path . $name_image;
+
+    	if (file_exists(ROOT.$filePath)) {
+    		return $filePath;
+    	}
+
+    	return $path . $noImage;
 	}
 }

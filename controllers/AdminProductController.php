@@ -34,7 +34,8 @@ class AdminProductController extends AdminBase
 			$options['name'] = $_POST['name'];
 			$options['description'] = $_POST['description'];
 
-			$exp_image = pathinfo($_FILES["image"]['name']);
+			$exp_image = pathinfo(array_shift($_FILES["image"]['name']));
+
 			if ($exp_image['filename'] && $exp_image['extension']) {
 				$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
 			}else{
@@ -47,20 +48,46 @@ class AdminProductController extends AdminBase
 
 			if ($errors == false) {
 				$id = Product::createProduct($options, self::checkAdmin());
-                // Если запись добавлена
                 if ($id) {
-                    // Проверим, загружалось ли через форму изображение
-                    if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
-                        // Если загружалось, переместим его в нужную папке, дадим новое имя
-                        move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . "/assets/image/product/{$options['image']}");
-                    }
-                };
-			}
 
+                	$tmpName = array_shift($_FILES["image"]["tmp_name"]);
+                    if (is_uploaded_file($tmpName)) {
+                        move_uploaded_file($tmpName, ROOT . "/assets/image/product/{$options['image']}");
+                    }
+                }
+
+                $this->getAddProductImages($id);
+			}
 		}
 
 		require_once ROOT.'/views/admin_product/create.php';
 		return true;
+	}
+
+	public function getAddProductImages($id)
+	{
+
+		$options = [];
+
+		foreach ($_FILES["image"]['name'] as $key => $imageName) {
+			$options['product_id'] = $id;
+
+			$exp_images = pathinfo($imageName);
+			if ($exp_images['filename'] && $exp_images['extension']) {
+				$options['name'] = md5($exp_images['filename']).'.'.$exp_images['extension'];
+			}else{
+				$options['name'] = NULL;
+			}
+			$issetImages = Product::addProductImages($options['name'], $id);
+
+			if ($issetImages) {
+				if (is_uploaded_file($_FILES["image"]["tmp_name"][$key]))
+				{
+			 		move_uploaded_file($_FILES["image"]["tmp_name"][$key], ROOT . "/assets/image/product/{$options['name']}");
+			 	}
+			 }
+
+		}
 	}
 
 	public function actionUpdate($id)
@@ -77,6 +104,7 @@ class AdminProductController extends AdminBase
 			$options['brand_id'] = $_POST['brand_id'];
 			$options['name'] = $_POST['name'];
 			$options['description'] = $_POST['description'];
+			$options['image'] = $product['image'];
 
 			$exp_image = pathinfo($_FILES["image"]['name']);
 			if ($exp_image['filename'] && $exp_image['extension']) {
@@ -94,6 +122,18 @@ class AdminProductController extends AdminBase
 		}
 
 		require_once ROOT.'/views/admin_product/update.php';
+		
+		return true;
+	}
+
+	public function actionDelete($id)
+	{
+		self::checkAdmin();
+
+		if(Product::deleteProductById($id))
+		{
+			header("Location: /admin/product");
+		}
 		
 		return true;
 	}

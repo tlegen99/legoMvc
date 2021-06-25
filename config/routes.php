@@ -3,6 +3,7 @@
 return [
 
 	// каталог,товары
+	'products/([0-9]+)' => 'product/view/$1',
 	'products/page-([0-9]+)' => 'product/index/$1',
 	'products' => 'product/index',
 

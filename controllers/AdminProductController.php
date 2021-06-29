@@ -100,6 +100,8 @@ class AdminProductController extends AdminBase
 
 		$product = Product::getProductById($id);
 
+		$images_product = Product::getImagesUpdate($id);
+
 		if (isset($_POST['submit'])) {
 			$options['brand_id'] = $_POST['brand_id'];
 			$options['name'] = $_POST['name'];

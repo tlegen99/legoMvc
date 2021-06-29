@@ -166,4 +166,38 @@ class Product
 
     	return $path . $noImage;
 	}
+
+	//вывод картинок у выбранного товара при редактировании
+    public static function getImagesUpdate($product_id)
+    {
+		$connect = Db::getConnection();
+		$sql = "SELECT * FROM product_image WHERE product_id = {$product_id}";
+
+		$result = $connect->prepare($sql);
+
+		//приводит к норм(дефолтной) выборке из базы в массиве
+		$result->setFetchMode(\PDO::FETCH_ASSOC);
+
+		//запускает команду
+		$result->execute();
+		//возвращаем полученный результат
+		return $result->fetchAll();
+	}
+	//вывод id картинки по id товара
+    public static function getImageProductById($image_id)
+    {
+		$connect = Db::getConnection();
+		$sql = "SELECT product_id FROM product_image WHERE id = {$image_id}";
+
+		$result = $connect->prepare($sql);
+
+		//приводит к норм(дефолтной) выборке из базы в массиве
+		$result->setFetchMode(\PDO::FETCH_ASSOC);
+
+		//запускает команду
+		if ($result->execute()) {
+			//возвращаем полученный результат
+			return $result->fetchColumn();
+		};
+	}
 }

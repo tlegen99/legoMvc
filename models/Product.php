@@ -146,7 +146,7 @@ class Product
 	public static function deleteProductById($id)
 	{
 		$connect = Db::getConnection();
-		$sql = "DELETE FROM product_model WHERE id = :id";
+		$sql = "WITH product_image AS (DELETE FROM product_model WHERE id = :id)";
 
 		$result = $connect->prepare($sql);
 		$result->bindParam(':id', $id, \PDO::PARAM_INT);

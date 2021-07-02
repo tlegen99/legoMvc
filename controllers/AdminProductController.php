@@ -86,7 +86,6 @@ class AdminProductController extends AdminBase
 			 		move_uploaded_file($_FILES["image"]["tmp_name"][$key], ROOT . "/assets/image/product/{$options['name']}");
 			 	}
 			 }
-
 		}
 	}
 
@@ -135,6 +134,8 @@ class AdminProductController extends AdminBase
 		if(Product::deleteProductById($id))
 		{
 			header("Location: /admin/product");
+		}else{
+			echo '<h1>Не фортануло</h1>';
 		}
 		
 		return true;

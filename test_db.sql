@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 25 2021 г., 12:45
+-- Время создания: Июл 02 2021 г., 15:57
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.4.5
 
@@ -97,8 +97,8 @@ INSERT INTO `product_image` (`id`, `product_id`, `name`) VALUES
 (35, 41, 'acae8e34dfc413a5145395fea41c69c9.jpg'),
 (36, 42, '902299b6d1af42a1adde6fc185c5fb06.jpg'),
 (37, 42, 'acae8e34dfc413a5145395fea41c69c9.jpg'),
-(38, 43, '902299b6d1af42a1adde6fc185c5fb06.jpg'),
-(39, 43, 'acae8e34dfc413a5145395fea41c69c9.jpg');
+(43, 10, 'b1dd54e10dc59f8f181b5d861e9bea3a.png'),
+(44, 10, '9c7bbc63361894ff669de125e43ae887.png');
 
 -- --------------------------------------------------------
 
@@ -127,10 +127,9 @@ INSERT INTO `product_model` (`id`, `brand_id`, `user_id`, `name`, `description`,
 (7, NULL, 2, 'Mercedes-Benz W123', 'ГАЗ 13 «Чайка» – седан F-класса, задний привод. Автомат. Бензиновый двигатель мощностью 195 лошадиных сил.', '0005_mersBenz.jpg'),
 (8, 2, 2, 'ЗИЛ 111', 'ЗИЛ 111 – седан, задний привод. Автомат. Бензиновый двигатель мощностью 200 лошадиных сил.\r\n', '0006_zill115.jpg'),
 (9, NULL, 2, 'Bentley S III', 'Bentley S III – седан, задний привод. Автомат. Бензиновый двигатель мощностью 200 лошадиных сил.\r\n', '0007_bentley.jpg'),
-(10, 1, 1, 'Ауди', 'hello bro', '4af52202f77beb11ba59ce2056aa7878.jpg'),
+(10, 1, 1, 'Ауди', 'hello bro', '9c7bbc63361894ff669de125e43ae887.png'),
 (41, 2, 1, 'test12', '', '6c6354588018d9ebf4b34451cb884b00.jpg'),
-(42, 2, 1, '1434234234', '', '6c6354588018d9ebf4b34451cb884b00.jpg'),
-(43, 2, 1, 'test234234', '', '6c6354588018d9ebf4b34451cb884b00.jpg');
+(42, 2, 1, '1434234234', '', '6c6354588018d9ebf4b34451cb884b00.jpg');
 
 -- --------------------------------------------------------
 
@@ -177,7 +176,8 @@ ALTER TABLE `product_brand`
 -- Индексы таблицы `product_image`
 --
 ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Индексы таблицы `product_model`
@@ -213,13 +213,13 @@ ALTER TABLE `product_brand`
 -- AUTO_INCREMENT для таблицы `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT для таблицы `product_model`
 --
 ALTER TABLE `product_model`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -230,6 +230,12 @@ ALTER TABLE `users`
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `product_image`
+--
+ALTER TABLE `product_image`
+  ADD CONSTRAINT `product_image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_model` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `product_model`

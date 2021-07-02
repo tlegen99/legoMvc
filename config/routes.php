@@ -12,7 +12,9 @@ return [
 	'login' => 'user/login',
 
 	//Управление товарами:
-	'admin/product-images/delete/([0-9]+)' => 'ImagesProduct/delete/$1',
+	'images/product/create/([0-9]+)' => 'imagesProduct/create/$1',
+	'images/product/delete/([0-9]+)' => 'imagesProduct/delete/$1',
+
     'admin/product/create' => 'adminProduct/create',
     'admin/product/update/([0-9]+)' => 'adminProduct/update/$1',
     'admin/product/delete/([0-9]+)' => 'adminProduct/delete/$1',

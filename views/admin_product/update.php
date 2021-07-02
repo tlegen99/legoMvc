@@ -45,6 +45,15 @@
 
 			</div>
 			<div class="col-sm-6">
+				<form method="POST" enctype="multipart/form-data" action="/images/product/create/<?=$product['id']; ?>">
+					<div class="form-group">
+						<label>Изображения</label>
+						<div class="d-flex">
+							<input type="file" class="form-control-file" name="image_product">
+							<input type="submit" class="btn btn-success" name="submit_image" value="Добавить">
+						</div>
+					</div>
+				</form>
 				<table class="table-bordered table image-update">
 					<tr style="background-color: rgba(0,0,0,.05);">
 						<th>Картинка</th>
@@ -63,7 +72,7 @@
 		                    	</a>
 		                    </td>
 		                    <td>
-		                    	<a href="/admin/product-images/delete/<?php echo $image['id']; ?>" title="Удалить">
+		                    	<a href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
 		                    		<i class="fa fa-times"></i>
 		                    	</a>
 		                    </td>

@@ -13,6 +13,7 @@ return [
 
 	//Управление товарами:
 	'images/product/create/([0-9]+)' => 'imagesProduct/create/$1',
+	'images/product/update/([0-9]+)' => 'imagesProduct/update/$1',
 	'images/product/delete/([0-9]+)' => 'imagesProduct/delete/$1',
 
     'admin/product/create' => 'adminProduct/create',

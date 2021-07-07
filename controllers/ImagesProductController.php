@@ -10,43 +10,66 @@ use models\ImagesProduct;
 class ImagesProductController extends AdminBase
 {
 	
-	public function actionCreate($product_id)
+	public function actionCreate($productId)
 	{
 
 		$name = '';
 
 		if (isset($_POST['submit_image'])) {
 
-			$exp_image = pathinfo($_FILES["image_product"]['name']);
+			if ($_FILES['image_product']['error'] == 0) {
+				$exp_image = pathinfo($_FILES["image_product"]['name']);
 
-			if ($exp_image['filename'] && $exp_image['extension']) {
-				$name = md5($exp_image['filename']).'.'.$exp_image['extension'];
+				if ($exp_image['filename'] && $exp_image['extension']) {
+					$name = md5($exp_image['filename'] . uniqid()).'.'.$exp_image['extension'];
+				}else{
+					$name = NULL;
+				}
+
+				$id = ImagesProduct::createProductImageById($productId, $name);
+	            if ($id) {
+
+	            	$tmpName = $_FILES["image_product"]["tmp_name"];
+	                if (is_uploaded_file($tmpName)) {
+	                    move_uploaded_file($tmpName, ROOT . "/assets/image/product/{$name}");
+	                }
+
+	            }
+
 			}else{
-				$name = NULL;
+				echo "<script>alert('Картинка не была загружена');</script>";
 			}
 
-			$id = ImagesProduct::createProductImageById($product_id, $name);
-            if ($id) {
-
-            	$tmpName = $_FILES["image_product"]["tmp_name"];
-                if (is_uploaded_file($tmpName)) {
-                    move_uploaded_file($tmpName, ROOT . "/assets/image/product/{$name}");
-                }
-
-                header("Location: /admin/product/update/{$product_id}");
-            }
+            header("Location: /admin/product/update/{$productId}");
 		}
+
+		return true;
+	}
+	
+	public function actionUpdate($productId)
+	{
+		echo '<pre>';
+		print_r($productId);
+		exit;
 	}
 	
 	public function actionDelete($id)
 	{
 		self::checkAdmin();
 
-		$product_id = Product::getImageProductById($id);
+		$productId = Product::getImageProductById($id);
+		$fileName = Product::getImageProductByName($id);
+		
+		$path = ROOT . "/assets/image/product/";
+		$filePath = $path . $fileName;
 
-		if(ImagesProduct::deleteProductImageById($id, $product_id))
+		if(ImagesProduct::deleteProductImageById($id, $productId))
 		{
-			header("Location: /admin/product/update/{$product_id}");
+			if (file_exists($filePath)) {
+				unlink($filePath);
+			}
+			
+			header("Location: /admin/product/update/{$productId}");
 		}
 		
 		return true;

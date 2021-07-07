@@ -146,7 +146,7 @@ class Product
 	public static function deleteProductById($id)
 	{
 		$connect = Db::getConnection();
-		$sql = "WITH product_image AS (DELETE FROM product_model WHERE id = :id)";
+		$sql = "DELETE FROM product_model WHERE id = :id";
 
 		$result = $connect->prepare($sql);
 		$result->bindParam(':id', $id, \PDO::PARAM_INT);
@@ -188,6 +188,23 @@ class Product
     {
 		$connect = Db::getConnection();
 		$sql = "SELECT product_id FROM product_image WHERE id = {$image_id}";
+
+		$result = $connect->prepare($sql);
+
+		//приводит к норм(дефолтной) выборке из базы в массиве
+		$result->setFetchMode(\PDO::FETCH_ASSOC);
+
+		//запускает команду
+		if ($result->execute()) {
+			//возвращаем полученный результат
+			return $result->fetchColumn();
+		};
+	}
+	//вывод id картинки по id товара
+    public static function getImageProductByName($image_id)
+    {
+		$connect = Db::getConnection();
+		$sql = "SELECT name FROM product_image WHERE id = {$image_id}";
 
 		$result = $connect->prepare($sql);
 

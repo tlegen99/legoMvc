@@ -37,7 +37,7 @@ class AdminProductController extends AdminBase
 			$exp_image = pathinfo(array_shift($_FILES["image"]['name']));
 
 			if ($exp_image['filename'] && $exp_image['extension']) {
-				$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
+				$options['image'] = md5($exp_image['filename'] . uniqid()).'.'.$exp_image['extension'];
 			}else{
 				$options['image'] = NULL;
 			}
@@ -74,7 +74,7 @@ class AdminProductController extends AdminBase
 
 			$exp_images = pathinfo($imageName);
 			if ($exp_images['filename'] && $exp_images['extension']) {
-				$options['name'] = md5($exp_images['filename']).'.'.$exp_images['extension'];
+				$options['name'] = md5($exp_images['filename'] . uniqid()).'.'.$exp_images['extension'];
 			}else{
 				$options['name'] = NULL;
 			}
@@ -109,7 +109,7 @@ class AdminProductController extends AdminBase
 
 			$exp_image = pathinfo($_FILES["image"]['name']);
 			if ($exp_image['filename'] && $exp_image['extension']) {
-				$options['image'] = md5($exp_image['filename']).'.'.$exp_image['extension'];
+				$options['image'] = md5($exp_image['filename'] . uniqid()).'.'.$exp_image['extension'];
 			}
 			if(Product::updateProductById($id, $options)) {
                 // Проверим, загружалось ли через форму изображение

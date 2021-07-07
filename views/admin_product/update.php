@@ -50,7 +50,11 @@
 						<label>Изображения</label>
 						<div class="d-flex">
 							<input type="file" class="form-control-file" name="image_product">
-							<input type="submit" class="btn btn-success" name="submit_image" value="Добавить">
+							<input type="submit" 
+								   onclick="submit_image()"
+								   class="btn btn-success" 
+								   name="submit_image" 
+								   value="Добавить" disabled>
 						</div>
 					</div>
 				</form>
@@ -67,7 +71,7 @@
 								<image src="/assets/image/product/<?= $image['name']; ?>" width="100">
 							</td>
 		                    <td>
-		                    	<a href="#" title="Редактировать">
+		                    	<a href="/images/product/update/<?= $image['id']; ?>" title="Редактировать">
 		                    		<i class="fa fa-pencil-square-o"></i>
 		                    	</a>
 		                    </td>

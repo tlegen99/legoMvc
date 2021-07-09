@@ -45,13 +45,12 @@
 
 			</div>
 			<div class="col-sm-6">
-				<form method="POST" enctype="multipart/form-data" action="/images/product/create/<?=$product['id']; ?>">
+				<form method="POST" id="formElem" enctype="multipart/form-data" action="/images/product/create/<?=$product['id']; ?>">
 					<div class="form-group">
 						<label>Изображения</label>
 						<div class="d-flex">
-							<input type="file" class="form-control-file" name="image_product">
+							<input type="file" class="form-control-file" name="image_product" id="image_product">
 							<input type="submit" 
-								   onclick="submit_image()"
 								   class="btn btn-success" 
 								   name="submit_image" 
 								   value="Добавить" disabled>
@@ -87,5 +86,31 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	const formElem = document.querySelector('#formElem');
+	const file = document.querySelector('#image_product');
+	const url = formElem.getAttribute('action');
+
+	formElem.onsubmit = async (e) => {
+	let formData = new FormData(formElem);
+
+	formData.append(file.name, file.files[0]);
+
+	// e.preventDefault();
+
+	console.log(file.files);
+	let response = await fetch(url, {
+		method: 'POST',
+		body: formData,
+        // headers:{
+        //     'x-requested-with' : 'XMLHttpRequest'
+        // }
+	}).then(response => {
+			console.log(response)
+	});
+
+	};
+</script>
 
 <?php include ROOT.'/views/layouts/_footer.php'; ?>

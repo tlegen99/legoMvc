@@ -17,28 +17,23 @@ class ImagesProductController extends AdminBase
 
 		if (isset($_POST['submit_image'])) {
 
-			if ($_FILES['image_product']['error'] == 0) {
-				$exp_image = pathinfo($_FILES["image_product"]['name']);
+			$exp_image = pathinfo($_FILES["image_product"]['name']);
 
-				if ($exp_image['filename'] && $exp_image['extension']) {
-					$name = md5($exp_image['filename'] . uniqid()).'.'.$exp_image['extension'];
-				}else{
-					$name = NULL;
-				}
-
-				$id = ImagesProduct::createProductImageById($productId, $name);
-	            if ($id) {
-
-	            	$tmpName = $_FILES["image_product"]["tmp_name"];
-	                if (is_uploaded_file($tmpName)) {
-	                    move_uploaded_file($tmpName, ROOT . "/assets/image/product/{$name}");
-	                }
-
-	            }
-
+			if ($exp_image['filename'] && $exp_image['extension']) {
+				$name = md5($exp_image['filename'] . uniqid()).'.'.$exp_image['extension'];
 			}else{
-				echo "<script>alert('Картинка не была загружена');</script>";
+				$name = NULL;
 			}
+
+			$id = ImagesProduct::createProductImageById($productId, $name);
+            if ($id) {
+
+            	$tmpName = $_FILES["image_product"]["tmp_name"];
+                if (is_uploaded_file($tmpName)) {
+                    move_uploaded_file($tmpName, ROOT . "/assets/image/product/{$name}");
+                }
+
+            }
 
             header("Location: /admin/product/update/{$productId}");
 		}

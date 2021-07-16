@@ -38,6 +38,7 @@ class ImagesProductController extends AdminBase
             header("Location: /admin/product/update/{$productId}");
 		}
 
+		// require_once ROOT.'/views/admin_product/update.php';
 		return true;
 	}
 	

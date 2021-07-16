@@ -2,19 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4ccf9f2-b358-4529-9ec1-6dd577a6629d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/ImagesProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ImagesProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin_product/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin_product/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/legoMvc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/legoMvc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1v1TlxgeKgOhgrtSRLqFWvVMHxi" />
   <component name="ProjectViewState">
@@ -27,6 +33,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c4ccf9f2-b358-4529-9ec1-6dd577a6629d" name="Default Changelist" comment="" />
@@ -36,7 +43,11 @@
       <updated>1625728756765</updated>
       <workItem from="1625728762397" duration="6000" />
       <workItem from="1625743758881" duration="4000" />
+      <workItem from="1626083655436" duration="17000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

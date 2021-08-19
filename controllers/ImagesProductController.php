@@ -15,7 +15,8 @@ class ImagesProductController extends AdminBase
 
 		$name = '';
 
-		if (isset($_POST['submit_image'])) {
+
+		// if (isset($_POST['submit_image'])) {
 
 			$exp_image = pathinfo($_FILES["image_product"]['name']);
 
@@ -34,12 +35,12 @@ class ImagesProductController extends AdminBase
                 }
 
             }
+			$images_product = Product::getImagesUpdate($productId);
 
-            header("Location: /admin/product/update/{$productId}");
-		}
+            // header("Location: /admin/product/update/{$productId}");
+		// }
 
-		// require_once ROOT.'/views/admin_product/update.php';
-		return true;
+		return require_once ROOT.'/views/admin_product/_images.php';
 	}
 	
 	public function actionUpdate($productId)

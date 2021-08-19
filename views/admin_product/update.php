@@ -44,73 +44,79 @@
 				</form>
 
 			</div>
-			<div class="col-sm-6">
-				<form method="POST" id="formElem" enctype="multipart/form-data" action="/images/product/create/<?=$product['id']; ?>">
-					<div class="form-group">
-						<label>Изображения</label>
-						<div class="d-flex">
-							<input type="file" class="form-control-file" name="image_product" id="image_product">
-							<input type="submit" 
-								   class="btn btn-success" 
-								   name="submit_image" 
-								   value="Добавить" disabled>
-						</div>
-					</div>
-				</form>
-				<table class="table-bordered table image-update">
-					<tr style="background-color: rgba(0,0,0,.05);">
-						<th>Картинка</th>
-						<th></th>
-						<th></th>
-					</tr>
-
-					<?php foreach ($images_product as $image): ?>
-						<tr>
-							<td>
-								<image src="/assets/image/product/<?= $image['name']; ?>" width="100">
-							</td>
-		                    <td>
-		                    	<a href="/images/product/update/<?= $image['id']; ?>" title="Редактировать">
-		                    		<i class="fa fa-pencil-square-o"></i>
-		                    	</a>
-		                    </td>
-		                    <td>
-		                    	<a href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
-		                    		<i class="fa fa-times"></i>
-		                    	</a>
-		                    </td>
-						</tr>
-					<?php endforeach ?>
-				</table>
+			<div class="col-sm-6" id="form_container">
+				<?php require_once ROOT.'/views/admin_product/_images.php'; ?>
 			</div>
 		</div>
 	</div>
 </section>
 
 <script>
+	const form_container = document.getElementById('form_container');
 	const formElem = document.querySelector('#formElem');
 	const file = document.querySelector('#image_product');
-	const url = formElem.getAttribute('action');
 
-	formElem.onsubmit = async (e) => {
-	let formData = new FormData(formElem);
+	function addImage() {
 
-	formData.append(file.name, file.files[0]);
+		let url = "/images/product/create/<?=$product['id']; ?>";
 
-	// e.preventDefault();
+		formElem.onsubmit = async (e) => {
+			let formData = new FormData(formElem);
 
-	console.log(file.files);
-	let response = await fetch(url, {
-		method: 'POST',
-		body: formData,
-        // headers:{
-        //     'x-requested-with' : 'XMLHttpRequest'
-        // }
-	}).then(response => {
-			console.log(response)
-	});
+			formData.append(file.name, file.files[0]);
 
-	};
+			e.preventDefault();
+
+			try {
+				let response = await fetch(url, {
+					method: 'POST',
+					body: formData
+				}).then((response) => {
+				    return response.text();
+				  })
+				  .then((html) => {
+				    form_container.innerHTML = html
+				  });
+
+			} catch(e) {
+				console.log('error', e);
+			}
+
+		};
+	}
+
+	function deleteImage() {
+
+		let url = "/images/product/create/<?=$product['id']; ?>";
+
+		formElem.onsubmit = async (e) => {
+			let formData = new FormData(formElem);
+
+			formData.append(file.name, file.files[0]);
+
+			e.preventDefault();
+
+			try {
+				let response = await fetch(url, {
+					method: 'POST',
+					body: formData
+				}).then((response) => {
+				    return response.text();
+				  })
+				  .then((html) => {
+				    form_container.innerHTML = html
+				  });
+
+			} catch(e) {
+				console.log('error', e);
+			}
+
+		};
+	}
+
+	addImage();
+	deleteImage();
+
 </script>
 
 <?php include ROOT.'/views/layouts/_footer.php'; ?>

@@ -28,7 +28,7 @@
             	</a>
             </td>
             <td>
-            	<a href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
+            	<a id="delLink" href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
             		<i class="fa fa-times"></i>
             	</a>
             </td>

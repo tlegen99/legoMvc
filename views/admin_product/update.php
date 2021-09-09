@@ -52,11 +52,13 @@
 </section>
 
 <script>
-	const form_container = document.getElementById('form_container');
-	const formElem = document.querySelector('#formElem');
-	const file = document.querySelector('#image_product');
+window.onload = function(){
 
 	function addImage() {
+
+		let form_container = document.getElementById('form_container');
+		let formElem = document.querySelector('#formElem');
+		let file = document.querySelector('#image_product');
 
 		let url = "/images/product/create/<?=$product['id']; ?>";
 
@@ -87,35 +89,63 @@
 
 	function deleteImage() {
 
-		let url = "/images/product/create/<?=$product['id']; ?>";
+		let form_container = document.getElementById('form_container');
+		let formElem = document.querySelector('#formElem');
+		let delLink = document.getElementById('#delLink');
 
-		formElem.onsubmit = async (e) => {
+		// let url = delLink.href;
+		// console.log(delLink)
+
+		delLink.onclick = async (e) => {
+
 			let formData = new FormData(formElem);
-
-			formData.append(file.name, file.files[0]);
 
 			e.preventDefault();
 
-			try {
-				let response = await fetch(url, {
-					method: 'POST',
-					body: formData
-				}).then((response) => {
-				    return response.text();
-				  })
-				  .then((html) => {
-				    form_container.innerHTML = html
-				  });
+			// try {
+			// 	let response = await fetch(url, {
+			// 		method: 'POST',
+			// 		body: formData
+			// 	}).then((response) => {
+			// 	    return response.text();
+			// 	  })
+			// 	  .then((html) => {
+			// 	    form_container.innerHTML = html
+			// 	  });
 
-			} catch(e) {
-				console.log('error', e);
-			}
-
+			// } catch(e) {
+			// 	console.log('error', e);
+			// }
 		};
+
+		// formElem.onsubmit = async (e) => {
+		// 	let formData = new FormData(formElem);
+
+		// 	formData.append(file.name, file.files[0]);
+
+		// 	e.preventDefault();
+
+		// 	try {
+		// 		let response = await fetch(url, {
+		// 			method: 'POST',
+		// 			body: formData
+		// 		}).then((response) => {
+		// 		    return response.text();
+		// 		  })
+		// 		  .then((html) => {
+		// 		    form_container.innerHTML = html
+		// 		  });
+
+		// 	} catch(e) {
+		// 		console.log('error', e);
+		// 	}
+
+		// };
 	}
 
 	addImage();
 	deleteImage();
+}
 
 </script>
 

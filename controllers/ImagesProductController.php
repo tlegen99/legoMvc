@@ -66,9 +66,11 @@ class ImagesProductController extends AdminBase
 				unlink($filePath);
 			}
 			
-			header("Location: /admin/product/update/{$productId}");
+			// header("Location: /admin/product/update/{$productId}");
 		}
+
+		$images_product = Product::getImagesUpdate($productId);
 		
-		return true;
+		return require_once ROOT.'/views/admin_product/_images.php';
 	}
 }

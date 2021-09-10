@@ -52,101 +52,93 @@
 </section>
 
 <script>
+
 window.onload = function(){
 
-	function addImage() {
+    function addImage() {
 
-		let form_container = document.getElementById('form_container');
-		let formElem = document.querySelector('#formElem');
-		let file = document.querySelector('#image_product');
+        let form_container = document.getElementById('form_container');
+        let formElem = document.querySelector('#formElem');
+        let file = document.querySelector('#image_product');
 
-		let url = "/images/product/create/<?=$product['id']; ?>";
+        let url = "/images/product/create/<?=$product['id']; ?>";
 
-		formElem.onsubmit = async (e) => {
-			let formData = new FormData(formElem);
+        formElem.onsubmit = async (e) => {
 
-			formData.append(file.name, file.files[0]);
+            let formData = new FormData(formElem);
 
-			e.preventDefault();
+            formData.append(file.name, file.files[0]);
 
-			try {
-				let response = await fetch(url, {
-					method: 'POST',
-					body: formData
-				}).then((response) => {
-				    return response.text();
-				  })
-				  .then((html) => {
-				    form_container.innerHTML = html
-				  });
+            e.preventDefault();
 
-			} catch(e) {
-				console.log('error', e);
-			}
+            console.log(url);
 
-		};
-	}
+            try {
+                let response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                }).then((response) => {
+                    return response.text();
+                  })
+                  .then((html) => {
+                    form_container.innerHTML = html;
+                    updateFunction();
+                  });
 
-	function deleteImage() {
+            } catch(e) {
+                console.log('error', e);
+            }
 
-		let form_container = document.getElementById('form_container');
-		let formElem = document.querySelector('#formElem');
-		let delLink = document.getElementById('#delLink');
+        };
+    }
 
-		// let url = delLink.href;
-		// console.log(delLink)
+    function deleteImage() {
 
-		delLink.onclick = async (e) => {
+        let form_container = document.getElementById('form_container');
+        let formElem = document.querySelector('#formElem');
+        let delLinks = document.querySelectorAll('.delLink');
 
-			let formData = new FormData(formElem);
+        // console.log(delLink)
 
-			e.preventDefault();
+        for (var i = 0; i < delLinks.length; i++) {
 
-			// try {
-			// 	let response = await fetch(url, {
-			// 		method: 'POST',
-			// 		body: formData
-			// 	}).then((response) => {
-			// 	    return response.text();
-			// 	  })
-			// 	  .then((html) => {
-			// 	    form_container.innerHTML = html
-			// 	  });
+            let url = delLinks[i].dataset.href;
 
-			// } catch(e) {
-			// 	console.log('error', e);
-			// }
-		};
+            delLinks[i].addEventListener('click', async function(e){
 
-		// formElem.onsubmit = async (e) => {
-		// 	let formData = new FormData(formElem);
+                let formData = new FormData(formElem);
 
-		// 	formData.append(file.name, file.files[0]);
+                e.preventDefault();
 
-		// 	e.preventDefault();
+                try {
+                    let response = await fetch(url, {
+                        method: 'DELETE',
+                        body: formData
+                    }).then((response) => {
+                        return response.text();
+                      })
+                      .then((html) => {
+                        form_container.innerHTML = html;
+                        updateFunction();
+                      });
 
-		// 	try {
-		// 		let response = await fetch(url, {
-		// 			method: 'POST',
-		// 			body: formData
-		// 		}).then((response) => {
-		// 		    return response.text();
-		// 		  })
-		// 		  .then((html) => {
-		// 		    form_container.innerHTML = html
-		// 		  });
+                } catch(e) {
+                    console.log('error', e);
+                }
+            });
+        }
+    }
 
-		// 	} catch(e) {
-		// 		console.log('error', e);
-		// 	}
+    function updateFunction() {
+        addImage();
+        deleteImage();
+    }
 
-		// };
-	}
-
-	addImage();
-	deleteImage();
+    addImage();
+    deleteImage();
 }
 
 </script>
 
 <?php include ROOT.'/views/layouts/_footer.php'; ?>
+

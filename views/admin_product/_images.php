@@ -6,7 +6,7 @@
 			<input type="submit" 
 				   class="btn btn-success" 
 				   name="submit_image" 
-				   value="Добавить" disabled>
+				   value="Добавить" >
 		</div>
 	</div>
 </form>
@@ -28,7 +28,7 @@
             	</a>
             </td>
             <td>
-            	<a id="delLink" href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
+            	<a class="delLink" href="#" data-href="/images/product/delete/<?= $image['id']; ?>" title="Удалить">
             		<i class="fa fa-times"></i>
             	</a>
             </td>

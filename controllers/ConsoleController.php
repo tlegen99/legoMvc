@@ -1,40 +1,39 @@
 <?php 
 
 /**
- * class Sql_migrate
+ * class ConsoleController
  */
 
-namespace console;
 use components\Db;
 
-class Sql_migrate
+class ConsoleController
 {
 
-	public function migrate()
+	public function actionMigrate()
 	{
-		$connect = \components\Db::getConnection();
-		// echo '<pre>';
-		// print_r('hello');
-		// exit;
-		$this->getMigrationFiles($conn);
+		$connect = Db::getConnection();
+
+		$this->getMigrationFiles($connect);
 	}
 
 	// Получаем список файлов для миграций
 	public function getMigrationFiles($conn)
 	{
 	    // Находим папку с миграциями
-	    $sqlFolder = str_replace('\\', '/', realpath(dirname(__FILE__)) . '/');
-	    echo '<pre>';
-	    print_r($sqlFolder);
-	    exit;
+	    $sqlFolder = str_replace('\\', '/', ROOT . '/migrations' . '/');
 	    // Получаем список всех sql-файлов
 	    $allFiles = glob($sqlFolder . '*.sql');
 
+	    $routes = include(ROOT . '/config/db_params.php');
+
 	    // Проверяем, есть ли таблица versions 
 	    // Так как versions создается первой, то это равносильно тому, что база не пустая
-	    $query = sprintf('show tables from `%s` like "%s"', DB_NAME, DB_TABLE_VERSIONS);
+	    $query = sprintf('show tables from `%s` like "%s"', $routes['dbname'], $routes['table_versions']);
 	    $data = $conn->query($query);
-	    $firstMigration = !$data->num_rows;
+	    $firstMigration = !$data->rowCount();
+	    echo '<pre>';
+	    print_r($firstMigration);
+	    exit;
 	    
 	    // Первая миграция, возвращаем все файлы из папки sql
 	    if ($firstMigration) {

@@ -24,5 +24,8 @@ return [
 	//Администратор:
 	'admin' => 'admin/index',
 
+
+	'console/migrate' => 'console/migrate',
+
 	'' => 'site/index',
 ];

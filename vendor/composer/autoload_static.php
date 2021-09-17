@@ -13,6 +13,7 @@ class ComposerStaticInit8614356bbfba2d6eafb02d7dcd9ed352
         ),
         'c' => 
         array (
+            'console\\' => 8,
             'components\\' => 11,
         ),
     );
@@ -21,6 +22,10 @@ class ComposerStaticInit8614356bbfba2d6eafb02d7dcd9ed352
         'models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models',
+        ),
+        'console\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/console',
         ),
         'components\\' => 
         array (

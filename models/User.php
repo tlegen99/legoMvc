@@ -9,8 +9,8 @@ use components\Db;
 class User
 {
 
-	public static function checkName($name)
-	{
+	public static function checkName($name): bool
+    {
 		if (strlen($name) >= 3) {
 			return true;
 		}	
@@ -18,8 +18,8 @@ class User
 		return false;
 	}
 	
-	public static function checkPassword($password)
-	{
+	public static function checkPassword($password): bool
+    {
 		if (strlen($password) >= 6) {
 			return true;
 		}	
@@ -27,11 +27,11 @@ class User
 		return false;
 	}
 
-	public static function checkNameExist($name)
-	{
-		$db = Db::getConnection();
+	public static function checkNameExist($name): bool
+    {
 		$sql = "SELECT COUNT(*) FROM users WHERE nick_name = :nick_name AND status = 1";
-		$result = $db->prepare($sql);
+
+		$result = Db::getConnection()->prepare($sql);
 		$result->bindParam(':nick_name', $name, \PDO::PARAM_STR);
 		$result->execute();
 
@@ -42,9 +42,8 @@ class User
 
 	}
 
-	public static function checkUserData($name, $password)
+	public static function checkUserId($name, $password): ?int
 	{
-
 		$password = md5($password);
 
 		$db = Db::getConnection();
@@ -55,15 +54,15 @@ class User
 		$result->execute();
 
 		$user = $result->fetch();
-		if ($user) {
-			return $user['id'];
+		if (!$user) {
+			return null;
 		}
-		return false;
+		return $user['id'];
 	}
 
 	//запоминание пользователя
-	public static function auth($userId)
-	{
+	public static function auth($userId): void
+    {
 		$_SESSION['user'] = $userId;
 	}
 
@@ -77,7 +76,7 @@ class User
 	}
 
 
-    public static function isGuest()
+    public static function isGuest(): bool
     {
         if (isset($_SESSION['user'])) {
             return false;

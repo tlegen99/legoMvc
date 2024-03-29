@@ -5,5 +5,8 @@
             "models\\": "models/",
             "console\\": "console/"
         }
-    }
+    },
+  "require": {
+    "ext-pdo": "*"
+  }
 }

@@ -8,10 +8,8 @@ include_once ROOT. '/models/News.php';
 class NewsController
 {
 	
-	public function actionIndex()
-	{
-		$newsList = [];
-
+	public function actionIndex(): true
+    {
 		$newsList = News::getNewsList();
 
 		require_once ROOT.'/views/news/index.php';
@@ -19,8 +17,8 @@ class NewsController
 		return true;
 	}
 	
-	public function actionView($id)
-	{
+	public function actionView($id): true
+    {
 		if ($id) {
 			$newsItem = News::getNewsListById($id);
 

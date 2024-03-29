@@ -8,18 +8,15 @@ use models\User;
 class UserController
 {
 	
-	public function actionLogin()
-	{
+	public function actionLogin(): bool
+    {
 		$name = '';
 		$password = '';
 
-		$errors = false;
-
-		// echo '<pre>';
-		// print_r(md5(User::pass()['pass_hash']));
-		// exit;
+		$errors = [];
 
 		if (isset($_POST['submit'])) {
+
 			$name = $_POST['login'];
 			$password = $_POST['password'];
 
@@ -31,14 +28,13 @@ class UserController
 				$errors[] = 'Пароль не должен быть короче 6 символов';
 			}
 
-			if (User::checkNameExist($name)) {
+			if (!User::checkNameExist($name)) {
 				$errors[] = 'Такой логин уже существует';
 			}
 
+			$userId = User::checkUserId($name, $password);
 
-			$userId = User::checkUserData($name, $password);
-
-			if ($userId == false) {
+			if (!$userId) {
 				$errors[] = 'Неверные данные для входа';
 			}else{
 				User::auth($userId);

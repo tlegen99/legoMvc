@@ -1,9 +1,10 @@
 <?php
 
 return [
-	'host' => 'localhost',
-	'dbname' => 'test_db',
+	'host' => 'mysql',
+    'port' => '3306',
+	'dbname' => 'legoMvc',
 	'user' => 'root',
-	'password' => '',
+	'password' => 'root',
 	'table_versions' => 'versions',
 ];

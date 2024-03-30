@@ -13,8 +13,11 @@ class ProductController
 	
 	public function actionIndex($page = 1)
 	{
-		$productList = Product::getListView($page);
-		$productCount = Product::getProductCount() + 1;
+        $limit = 3;
+        $offset = $limit * ($page - 1);
+
+        $productList = Product::limit($limit)->offset($offset)->get();
+		$productCount =  Product::all()->count() + 1;
 
 		// Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($productCount, $page, Product::SHOW_BY_DEFAULT, 'page-');

@@ -2,11 +2,12 @@
 
 namespace models;
 use components\Db;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * class User
  */
-class User
+class User extends Model
 {
 
 	public static function checkName($name): bool

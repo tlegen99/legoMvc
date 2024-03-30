@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     protected $table = 'product_model';
 
-	const SHOW_BY_DEFAULT = 3;
+	public const SHOW_BY_DEFAULT = 3;
 
 	public static function getProductList()
 	{
@@ -69,20 +69,9 @@ class Product extends Model
         return 0;
 	}
 
-	public static function getProductById($id)
+	public static function getProductById(int $id)
 	{
-		$connect = Db::getConnection();
-		$sql = "SELECT * FROM product_model WHERE id = {$id}";
-
-		$result = $connect->prepare($sql);
-
-		//приводит к норм(дефолтной) выборке из базы в массиве
-		$result->setFetchMode(\PDO::FETCH_ASSOC);
-
-		//запускает команду
-		$result->execute();
-		//возвращаем полученный результат
-		return $result->fetch();
+		return self::where('id', $id)->get();
 	}
 
 	public static function updateProductById($id, $options)

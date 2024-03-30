@@ -3,7 +3,8 @@
         "psr-4": {
             "components\\": "components/",
             "models\\": "models/",
-            "console\\": "console/"
+            "console\\": "console/",
+            "service\\": "service/"
         }
     },
   "require": {
